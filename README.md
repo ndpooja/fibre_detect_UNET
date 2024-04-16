@@ -1,58 +1,13 @@
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  </a>
 
-  <h3 align="center">UnetID-FibreSeg</h3>
-
-  <p align="center">
-    Individual fibre segmentation with PyTorch based on
-    <br />
-    <a href="https://www.mdpi.com/2072-4292/12/10/1544/htm"><strong>U-Net-ID
-    </strong></a>
-    
-  </p>
-</div>
-
-<!-- ![UnetID](images/unetid.png) -->
-![Segmentation results](images/segm_results.png)
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#introduction">Introduction</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#usage">Usage</a>
-        <ul>
-        <li><a href="#training">Training</a></li>
-        <li><a href="#segment-slices">Segment slices</a></li>
-        <li><a href="#segment-volume">Segment volume</a></li>
-        <li><a href="#evaluation">Evaluation</a></li>
-      </ul>
-    </li>
-    <li><a href="#how-UnetID-FibreSeg-works">How UnetID-FibreSeg works</a></li>
-  </ol>
-</details>
 
 ## Introduction
-This project, **UnetID-FibreSeg**, is designed for the automatic segmentation of individual fibres in unidirectional fibre reinforced composites. It is a powerful tool that allows for the understanding of the characteristics of composite microstructures. UnetID-FibreSeg can be used for:
+This project shows the method to detect fibres centre points from images at various noise levels. We have used four images from different dataset
 
-    Segmentation of low contrast and relatively low resolution CT images
-    Automated segmentation of large 3D CT data
+1. Mock and UD - slice number 500 [link here](https://zenodo.org/records/5483719)
+2. Wet 244p1 dataset - slice number 0999: data/Recons/Bunch2WoPR/rec20160318_223946_244p1_1p5cm_cont__4097im_1500ms_ML17keV_7.h5 [data link](http://dx.doi.org/doi:10.18126/M2QM0Z)
+3. T700 reference - slice number 361 : T700-T-21_pco_0p4um_reference.h5 [data link](https://doi.org/10.5281/zenodo.7632124)
 
-With UnetID-FibreSeg, you can easily segment and analyze composite microstructures, providing you with valuable insights that can help improve the performance and strength of your materials.
-  
-## Getting Started
-This project has been tested on Pytorch 1.9.0, Python 3.9.5, jupyter lab 3.3.2, and Windows 10 using an NVIDIA RTX A5000 GPU.
 ### Prerequisites
 1. Install [PyTorch](https://pytorch.org/)  
    For the previous PyTorch versions, please check [here](https://pytorch.org/get-started/previous-versions/).
@@ -67,33 +22,22 @@ import torch
 print(torch.cuda.is_available())
 print(torch.version.cuda)
 ```
-
-## Usage
-We have provided several jupyter notebooks to aid in understanding the usage of UnetID-FibreSeg for individual fibre segmentation. 
-To use them, please put these notebooks outside of the notebook folder within this project.
+### Data preparation
+Prepare noisy data
+```bash
+data_prep.ipynb
+```
 
 ### Training
 Train a model from scratch using 2D slices.
 ```bash
-notebooks/trainfibre2D.ipynb
+train_fibre_mock.py
 ```
 
-### Segment slices
+### Segment slices and performance evaluation
 Perform segmentation on any specified 2D slice.
 ```bash
-notebooks/segmfibre2D.ipynb
-```
-
-### Segment volume
-Perform segmentation on a 3D CT volume.
-```bash
-notebooks/segmfibre3D.ipynb
-```
-
-### Evaluation
-Evaluate the segmentation results on an entire 3D dataset.
-```bash
-notebooks/evalulate.ipynb
+segm_fibre_mock.ipynb
 ```
 
 ## How UnetID-FibreSeg works
